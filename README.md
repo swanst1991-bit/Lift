@@ -109,7 +109,7 @@ The test suite runs under the JavaScriptCore shell that ships with macOS, becaus
 there is no `node` on the machine this was built on:
 
 ```sh
-dev/run-tests.sh      # 496 assertions
+dev/run-tests.sh      # prints the assertion count; exits non-zero on failure
 ```
 
 It covers the date arithmetic (including both British Summer Time boundaries, which
