@@ -1,0 +1,4 @@
+# Screenshots are regenerable with dev/shot.py — no need to version 1.6MB of PNGs.
+dev/shots/
+
+.DS_Store
