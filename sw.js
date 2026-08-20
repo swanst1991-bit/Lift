@@ -2,7 +2,7 @@
    Stale-while-revalidate: the app opens instantly from cache with no signal,
    and quietly picks up a new version the next time it has one.
    Bump CACHE when you deploy a change. */
-const CACHE = "lift-v2";
+const CACHE = "lift-v3";   // v3 — challenges
 const ASSETS = [
   "./", "./index.html", "./manifest.webmanifest",
   "./icon-180.png", "./icon-192.png", "./icon-512.png", "./icon-512-maskable.png"

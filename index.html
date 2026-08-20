@@ -141,6 +141,66 @@ select{padding-right:36px;background-repeat:no-repeat;background-position:right 
 .sw{width:10px;height:10px;border-radius:3px;flex:none}
 .sw.ln{height:3px;width:14px;border-radius:2px}
 
+/* ---------- challenges ---------- */
+/* Kind is carried by --k so one rule set colours cards, pills and buttons. */
+.k-lift{--k:var(--accent)} .k-run{--k:var(--blue)} .k-body{--k:var(--aqua)} .k-fun{--k:var(--pb)}
+.pill.kind{background:color-mix(in srgb, var(--k) 15%, transparent);color:var(--k)}
+
+.hero{display:flex;align-items:center;gap:13px;width:100%;background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--r);padding:15px;margin-bottom:12px;text-align:left}
+.hero .ic{width:44px;height:44px;border-radius:12px;flex:none;display:grid;place-items:center;
+  background:var(--accent);color:#fff;font-size:22px}
+.hero .t{font-size:19px;font-weight:650}
+.hero .d{color:var(--ink-3);font-size:13px;margin-top:2px}
+.hero:active{filter:brightness(.96)}
+
+/* Four kind chips have to sit on one row at 402px, so they run tight. */
+.chipbar{display:flex;gap:5px;flex-wrap:wrap}
+.fchip{padding:7px 10px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);
+  font-size:13px;font-weight:600;color:var(--ink-2);white-space:nowrap}
+.fchip.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+
+.chal{border-color:var(--k)}
+.chal .top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.chal .nm{font-size:22px;font-weight:650;letter-spacing:-.015em;line-height:1.15}
+.chal .bl{color:var(--ink-2);font-size:14px;line-height:1.5;margin-top:8px}
+.presc{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;
+  padding:13px;margin-top:12px;text-align:center}
+.presc .v{font-size:25px;font-weight:650;letter-spacing:-.02em;color:var(--k);
+  font-variant-numeric:tabular-nums}
+.presc .k{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-3);margin-bottom:4px}
+.chal .why{color:var(--ink-3);font-size:12.5px;line-height:1.5;margin-top:10px}
+.chal .acts{display:flex;gap:8px;margin-top:13px}
+/* Primary buttons take the challenge's colour, so a treadmill challenge never
+   shows a lifting-orange button. .sec and .danger keep their own styling. */
+.k-lift .btn:not(.sec):not(.danger), .k-run .btn:not(.sec):not(.danger),
+.k-body .btn:not(.sec):not(.danger), .k-fun .btn:not(.sec):not(.danger),
+.k-lift .addset, .k-run .addset, .k-body .addset, .k-fun .addset{background:var(--k)}
+
+/* runner */
+.now{background:var(--surface);border:1px solid var(--k);border-radius:var(--r);
+  padding:18px 14px;margin-bottom:12px;text-align:center}
+.now .lbl{font-size:13px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-3)}
+.clock{font-size:58px;font-weight:600;letter-spacing:-.035em;line-height:1.05;margin:6px 0;
+  font-variant-numeric:tabular-nums;color:var(--k)}
+.clock.rest{color:var(--ink-2)}
+.now .cue{font-size:19px;font-weight:650;font-variant-numeric:tabular-nums}
+.now .nx{color:var(--ink-3);font-size:13px;margin-top:8px}
+.bar{height:5px;border-radius:3px;background:var(--surface-2);overflow:hidden;margin-top:12px}
+.bar i{display:block;height:100%;background:var(--k);border-radius:3px;transition:width .3s linear}
+.slots{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+.slot{min-width:52px;padding:8px 9px;border-radius:10px;border:1px solid var(--line);
+  background:var(--surface-2);font-size:14px;font-weight:650;text-align:center;
+  font-variant-numeric:tabular-nums;color:var(--ink-3)}
+.slot.done{background:var(--k);border-color:var(--k);color:#fff}
+.slot.cur{border-color:var(--k);color:var(--k);box-shadow:inset 0 0 0 1px var(--k)}
+.steplist{display:flex;flex-direction:column;gap:4px;margin-top:10px}
+.srow{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px;font-size:13.5px;
+  background:var(--surface-2);color:var(--ink-3);font-variant-numeric:tabular-nums}
+.srow.cur{background:var(--k);color:#fff;font-weight:650}
+.srow.done{opacity:.45}
+.srow .g{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
 /* ---------- tabs ---------- */
 nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:rgba(245,245,244,.93);
   backdrop-filter:saturate(160%) blur(14px);-webkit-backdrop-filter:saturate(160%) blur(14px);
@@ -206,6 +266,11 @@ nav svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.9;
   </section>
 
   <!-- ============ PROGRESS ============ -->
+  <!-- ============ PLAY ============ -->
+  <section class="view" data-v="play">
+    <div id="playBody"></div>
+  </section>
+
   <section class="view" data-v="progress">
     <div class="head"><div><h1>Progress</h1><div class="sub">Trends and personal bests</div></div></div>
     <div id="progBody"></div>
@@ -214,7 +279,7 @@ nav svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.9;
   <!-- ============ SETTINGS ============ -->
   <section class="view" data-v="settings">
     <div class="head">
-      <div><h1>Settings</h1><div class="sub">Routines, exercises, backups</div></div>
+      <div><h1>Settings</h1><div class="sub">Routines, exercises, treadmill, backups</div></div>
       <button class="iconbtn" data-go="home" aria-label="Close">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
           stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
@@ -228,6 +293,7 @@ nav svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.9;
   <button data-go="home" class="on"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>Home</button>
   <button data-go="lift"><svg viewBox="0 0 24 24"><path d="M4 9v6M7 6v12M17 6v12M20 9v6M7 12h10"/></svg>Lift</button>
   <button data-go="cardio"><svg viewBox="0 0 24 24"><circle cx="16" cy="4.5" r="1.8"/><path d="M8.5 21l2.2-5.4-2.6-2.3.9-4.6 3.4-1.5 2.8 2.6 2.9.9"/><path d="m11 8.2-3.6 1.3L5 13"/><path d="m13.4 15.6 2.4 2.1.9 3.3"/></svg>Run</button>
+  <button data-go="play"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="8.6" cy="8.6" r="1.15" fill="currentColor" stroke="none"/><circle cx="15.4" cy="15.4" r="1.15" fill="currentColor" stroke="none"/><circle cx="15.4" cy="8.6" r="1.15" fill="currentColor" stroke="none"/><circle cx="8.6" cy="15.4" r="1.15" fill="currentColor" stroke="none"/></svg>Play</button>
   <button data-go="progress"><svg viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 19h16"/><path d="m7.5 15 3.5-4.5 3 2.5L20 7"/></svg>Progress</button>
 </nav>
 
@@ -240,7 +306,9 @@ nav svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.9;
    Lift — offline personal training log
    Data lives in this device's localStorage. Nothing is uploaded.
    ============================================================ */
-const KEY = "lift.v1";
+const KEY = "lift.v1";          // never change — renaming it orphans real history
+const BAK = "lift.v1.pre2";     // one-shot copy of the v1 blob, taken before the v2 upgrade
+const SCHEMA = 2;               // 1 = log only · 2 = + challenges, baselines
 const uid = () => Math.random().toString(36).slice(2, 9) + Date.now().toString(36).slice(-4);
 const $  = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => [...r.querySelectorAll(s)];
@@ -262,6 +330,12 @@ function relDate(s){
   if (diff < 7)   return diff + " days ago";
   return fmtDate(s);
 }
+/** relDate for use mid-sentence. Only the relative wordings lowercase — a
+    blanket toLowerCase turns "Thu 13 Aug" into "thu 13 aug". */
+const relPhrase = s => {
+  const r = relDate(s);
+  return /^(Today|Yesterday|\d+ days ago)$/.test(r) ? r.toLowerCase() : r;
+};
 
 /* ---- numbers ---- */
 const num  = n => (Math.round(n * 100) / 100).toString();
@@ -318,18 +392,68 @@ function seed(){
     rt("Upper B","upper",ub), rt("Lower B","lower",lb),
   ];
   return {
-    v: 1, ex: E, routines, order: routines.map(r => r.id),
-    sessions: [], runs: [], weights: [], draft: null, ui: {}
+    v: SCHEMA, ex: E, routines, order: routines.map(r => r.id),
+    sessions: [], runs: [], weights: [], draft: null, ui: {},
+    // v2 — challenges
+    challenges: [],   // completed challenge results, newest pushed last
+    bench: {},        // one-off benchmarks: max push-ups, plank hold, dead hang…
+    cdraft: null      // challenge in progress
   };
+}
+
+/* ============================================================
+   Migration
+   Real history lives in here and there is no server copy, so the rule is:
+   fill in what is missing, never replace what is present. A bad blob must
+   still yield a usable app, but it must not quietly bin someone's training.
+   ============================================================ */
+function migrate(raw){
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return seed();
+  const S2 = raw;
+
+  // Exercises, routines and order are seeded as a set or not at all: routine
+  // items store exercise ids, so pairing a saved exercise list with fresh seed
+  // routines would leave every routine pointing at an id that isn't there.
+  if (!Array.isArray(S2.ex) || !S2.ex.length){
+    const base = seed();
+    S2.ex = base.ex; S2.routines = base.routines; S2.order = base.order;
+  }
+  if (!Array.isArray(S2.routines)) S2.routines = [];
+  // Drop dangling ids and append any routine the order forgot.
+  if (!Array.isArray(S2.order)) S2.order = [];
+  S2.order = S2.order.filter(id => S2.routines.some(r => r.id === id));
+  S2.routines.forEach(r => { if (!S2.order.includes(r.id)) S2.order.push(r.id); });
+
+  if (!Array.isArray(S2.sessions)) S2.sessions = [];
+  if (!Array.isArray(S2.runs))     S2.runs = [];
+  if (!Array.isArray(S2.weights))  S2.weights = [];
+  if (S2.draft === undefined)      S2.draft = null;
+  if (!S2.ui || typeof S2.ui !== "object") S2.ui = {};
+
+  /* --- v1 → v2 --- */
+  if (!Array.isArray(S2.challenges)) S2.challenges = [];
+  if (!S2.bench || typeof S2.bench !== "object") S2.bench = {};
+  if (S2.cdraft === undefined) S2.cdraft = null;
+
+  S2.v = SCHEMA;
+  return S2;
 }
 
 /* ============================================================
    State
    ============================================================ */
 let S;
-try { S = JSON.parse(localStorage.getItem(KEY)) || seed(); }
-catch(e){ S = seed(); }
-if (!S || !S.ex) S = seed();
+try {
+  const rawStr = localStorage.getItem(KEY);
+  const raw = rawStr ? JSON.parse(rawStr) : null;
+  // Keep a copy of the v1 blob before the first v2 write. This history has no
+  // server copy and no other backup, so the upgrade gets an undo.
+  if (raw && (raw.v || 1) < SCHEMA && !localStorage.getItem(BAK)){
+    try { localStorage.setItem(BAK, rawStr); } catch(e){}
+  }
+  S = migrate(raw);
+} catch(e){ S = seed(); }
+if (!S || !Array.isArray(S.ex) || !S.ex.length) S = seed();
 
 let saveErr = false;
 function save(){
@@ -424,6 +548,402 @@ function weightDelta(weekStart){
   };
   const now = meanTo(addDays(weekStart, 7)), prev = meanTo(weekStart);
   return (now == null || prev == null) ? null : now - prev;
+}
+
+/* ============================================================
+   Challenges — maths
+   Every number a challenge prescribes comes from this file's own history.
+   A challenge that asks for something unreachable gets ignored after two
+   goes, so the calibration matters more than the challenge list does.
+   ============================================================ */
+const roundTo  = (x, step) => step > 0 ? Math.round(x / step) * step : Math.round(x);
+const pct      = (max, p) => max * p;
+/** Brzycki, shown next to Epley so the spread between the two is visible. */
+const brzycki  = (w, r) => (r <= 0 || r >= 37) ? 0 : w * 36 / (37 - r);
+/** Inverse Epley: the weight that should give exactly `reps`.
+    The single-rep case mirrors e1rm's, which does not inflate a single —
+    without it a 120 kg max reads back as a 116 kg "1RM". */
+const repMax   = (max, reps) =>
+  (max <= 0 || reps <= 0) ? 0 : (reps === 1 ? max : max / (1 + reps / 30));
+
+const exByName = n => S.ex.find(e => e.name.toLowerCase() === String(n).toLowerCase());
+/** Best estimated 1RM for an exercise named in a challenge definition.
+    Challenges name lifts, not ids — ids are generated per install. */
+function e1rmOf(name){
+  const e = exByName(name);
+  return e ? bestE1RM(e.id) : 0;
+}
+const incOf = name => { const e = exByName(name); return e ? e.inc : 2.5; };
+
+/* ---- treadmill ----
+   A treadmill takes numbers, not RPE, so challenges prescribe km/h and an
+   incline. Limits are editable in Settings because they are machine-specific;
+   the defaults are typical for a UK home treadmill. */
+const tmMax = () => S.ui.tmMax > 0 ? S.ui.tmMax : 16;
+const tmInc = () => S.ui.tmInc > 0 ? S.ui.tmInc : 12;
+const clampSpeed   = k => Math.min(tmMax(), Math.max(1, Math.round(k * 10) / 10));
+const clampIncline = i => Math.min(tmInc(), Math.max(0, Math.round(i)));
+const paceOf        = (km, sec) => km > 0 ? sec / km : 0;
+const speedFromPace = secPerKm => secPerKm > 0 ? Math.round(3600 / secPerKm * 10) / 10 : 0;
+const paceFromSpeed = kmh => kmh > 0 ? 3600 / kmh : 0;
+
+/** Distance-weighted mean pace, so a long steady run counts for more than a
+    short blast. Null when there is nothing recent to go on. */
+function recentPace(days = 60){
+  const from = addDays(iso(), -days);
+  const rs = S.runs.filter(r => r.date >= from && r.km > 0 && r.sec > 0);
+  if (!rs.length) return null;
+  return rs.reduce((a,r) => a + r.sec, 0) / rs.reduce((a,r) => a + r.km, 0);
+}
+/** Fastest pace over a real distance — the basis for interval speeds. */
+function bestPace(days = 120){
+  const from = addDays(iso(), -days);
+  const rs = S.runs.filter(r => r.date >= from && r.km >= 1 && r.sec > 0);
+  if (!rs.length) return null;
+  return Math.min(...rs.map(r => r.sec / r.km));
+}
+const EASY_FALLBACK = 390;   // 6:30 /km — only used until a run is logged
+const HARD_FALLBACK = 330;   // 5:30 /km
+const easyPace = () => recentPace() || EASY_FALLBACK;
+const hardPace = () => bestPace() || Math.round(easyPace() * 0.9);
+
+/* ---- bodyweight baselines ----
+   Push-ups and holds are not in the training log, so the first challenge that
+   needs one runs a short test and stores the number here. */
+const baselineFor = k => (S.bench[k] && S.bench[k].v > 0) ? S.bench[k].v : 0;
+function setBaseline(k, v){
+  if (!(v > 0)) return null;
+  S.bench[k] = {v: Math.round(v * 10) / 10, date: iso()};
+  save();
+  return S.bench[k];
+}
+
+/* ---- challenge history ---- */
+const challengeById = cid => CHALLENGES.find(c => c.cid === cid);
+const doneChallenges = () => S.challenges.slice().sort((a,b) => a.date < b.date ? 1 : -1);
+const lastDoneAt = cid => {
+  const ds = S.challenges.filter(c => c.cid === cid).map(c => c.date).sort();
+  return ds.length ? ds[ds.length - 1] : null;
+};
+/** Best result for a challenge. `lower` challenges are timed, where less wins. */
+function challengePB(cid){
+  const done = S.challenges.filter(c => c.cid === cid && typeof c.score === "number");
+  if (!done.length) return null;
+  const lower = !!(challengeById(cid) || {}).lower;
+  return done.reduce((b, x) =>
+    (lower ? x.score < b.score : x.score > b.score) ? x : b);
+}
+
+/* Swappable so the draw can be tested deterministically. */
+let RND = Math.random;
+function setRnd(f){ RND = f || Math.random; }
+const pickOne = arr => arr[Math.floor(RND() * arr.length) % arr.length];
+
+/* The four lifts the strength challenges rotate through. */
+const BIG = ["Back Squat", "Barbell Bench Press", "Deadlift", "Overhead Press"];
+/** Least-recently-challenged big lift that actually has history behind it. */
+function pickBig(){
+  const withData = BIG.filter(n => e1rmOf(n) > 0);
+  const pool = withData.length ? withData : BIG;
+  const lastAt = n => {
+    const ds = S.challenges.filter(x => x.exName === n).map(x => x.date).sort();
+    return ds.length ? ds[ds.length - 1] : "0000-00-00";
+  };
+  return pool.slice().sort((a, b) =>
+    lastAt(a) < lastAt(b) ? -1 : lastAt(a) > lastAt(b) ? 1 : (RND() - 0.5))[0];
+}
+
+/* ============================================================
+   Challenges — the library
+   Definitions live in code, not in localStorage, so new challenges arrive
+   with an app update without touching saved results.
+
+   cid       stable id — never reuse one, results are keyed on it
+   kind      lift | run | body   (also the colour)
+   mins      rough time cost, used by the "I've got 20 minutes" filter
+   needs     false when there isn't enough history to prescribe honestly
+   baseline  key in S.bench this challenge scales off, when one exists
+   needsBaseline  key in S.bench it cannot be prescribed without — starting it
+                  runs the test first rather than hiding the challenge, so the
+                  prompt is the way in and not a wall
+   prescribe returns the target the runner and the card both read
+   lower     true when a smaller score is a better score (timed challenges)
+   logAs     session | run | null — where the result lands in the main log
+   ============================================================ */
+const CHALLENGES = [
+  /* ---------------- lifting ---------------- */
+  {
+    cid: "5x5", name: "5 × 5", kind: "lift", mins: 35, tags: ["strength"],
+    blurb: "Five sets of five. Hard but never grindy — if the last set is a fight, it was right.",
+    needs: () => BIG.some(n => e1rmOf(n) > 0),
+    logAs: "session", lower: false,
+    prescribe(){
+      const n = pickBig(), max = e1rmOf(n);
+      // 92% of a true 5RM: five sets of five is far more work than one set of five.
+      const w = roundTo(repMax(max, 5) * 0.92, incOf(n));
+      return {mode: "sets", exName: n, sets: 5, reps: 5, w, max,
+              note: max ? `About ${Math.round(w / max * 100)}% of your estimated ${Math.round(max)} kg max.`
+                        : "No history for this lift yet — start light and judge it."};
+    },
+    fmt: t => `5 × 5 · ${kg(t.w)}`,
+    score: r => r.sets.reduce((a, s) => a + s.w * s.r, 0),
+    scoreFmt: v => `${num(Math.round(v))} kg total`,
+  },
+  {
+    cid: "amrap-75", name: "One all-out set", kind: "lift", mins: 20, tags: ["strength", "test"],
+    blurb: "A single set at 75% taken to the point where the next rep would break form. Nothing else.",
+    needs: () => BIG.some(n => e1rmOf(n) > 0),
+    logAs: "session", lower: false,
+    prescribe(){
+      const n = pickBig(), max = e1rmOf(n);
+      const w = roundTo(pct(max, 0.75), incOf(n));
+      // Epley run backwards: 75% should be worth roughly ten reps.
+      const expect = max ? Math.round((max / w - 1) * 30) : 10;
+      return {mode: "sets", exName: n, sets: 1, reps: expect, w, max, amrap: true,
+              note: `Ten reps is par at this weight. ${expect} would match your current estimate.`};
+    },
+    fmt: t => `AMRAP · ${kg(t.w)}`,
+    score: r => r.sets.reduce((a, s) => a + s.r, 0),
+    scoreFmt: v => `${v} reps`,
+  },
+  {
+    cid: "ladder-12345", name: "Ladder to five", kind: "lift", mins: 25, tags: ["strength"],
+    blurb: "1, 2, 3, 4, 5 reps with a full breath between rungs. Heavy, but the early rungs are free.",
+    needs: () => BIG.some(n => e1rmOf(n) > 0),
+    logAs: "session", lower: false,
+    prescribe(){
+      const n = pickBig(), max = e1rmOf(n);
+      const w = roundTo(pct(max, 0.85), incOf(n));
+      return {mode: "sets", exName: n, ladder: [1,2,3,4,5], w, max,
+              sets: 5, reps: null,
+              note: "Rest as long as the last rung took. Stop the ladder if a rep slows."};
+    },
+    fmt: t => `1-2-3-4-5 · ${kg(t.w)}`,
+    score: r => r.sets.reduce((a, s) => a + s.w * s.r, 0),
+    scoreFmt: v => `${num(Math.round(v))} kg total`,
+  },
+  {
+    cid: "gvt-10x10", name: "Ten by ten", kind: "lift", mins: 40, tags: ["volume"],
+    blurb: "Ten sets of ten at a weight that looks insultingly light for the first four sets.",
+    needs: () => BIG.some(n => e1rmOf(n) > 0),
+    logAs: "session", lower: false,
+    prescribe(){
+      const n = pickBig(), max = e1rmOf(n);
+      const w = roundTo(pct(max, 0.55), incOf(n));
+      return {mode: "sets", exName: n, sets: 10, reps: 10, w, max, rest: 90,
+              note: "Ninety seconds between sets, no more. The weight is not the hard part."};
+    },
+    fmt: t => `10 × 10 · ${kg(t.w)}`,
+    score: r => r.sets.reduce((a, s) => a + s.w * s.r, 0),
+    scoreFmt: v => `${num(Math.round(v))} kg total`,
+  },
+
+  /* ---------------- treadmill ---------------- */
+  {
+    cid: "1k-tt", name: "1 km time trial", kind: "run", mins: 15, tags: ["test", "hard"],
+    blurb: "One kilometre, flat, as fast as you can hold. Two minutes of walking first.",
+    needs: () => true,
+    logAs: "run", lower: true,
+    prescribe(){
+      const p = hardPace();
+      const target = Math.round(p * 0.95);   // a time trial should beat interval pace
+      return {mode: "single", km: 1, incline: 0,
+              field: {key: "sec", label: "Your time", unit: "time"},
+              guess: target, speed: clampSpeed(speedFromPace(target)),
+              note: `Start at ${num(clampSpeed(speedFromPace(target)))} km/h and lift it in the last 300 m. `
+                  + `${mmss(target)} would be a good day.`};
+    },
+    fmt: t => `1 km · target ${mmss(t.guess)}`,
+    score: r => r.sec,
+    scoreFmt: v => mmss(v),
+  },
+  {
+    cid: "4x4", name: "Four by four", kind: "run", mins: 35, tags: ["intervals", "hard"],
+    blurb: "Four minutes hard, three minutes easy, four times. The one that actually moves your engine.",
+    needs: () => true,
+    logAs: "run", lower: false,
+    prescribe(){
+      const hard = clampSpeed(speedFromPace(hardPace() * 1.02));
+      const easy = clampSpeed(speedFromPace(easyPace() * 1.12));
+      const steps = [{label: "Warm up", sec: 300, speed: easy, incline: 1}];
+      for (let i = 1; i <= 4; i++){
+        steps.push({label: `Hard ${i}/4`, sec: 240, speed: hard, incline: 1});
+        if (i < 4) steps.push({label: `Easy ${i}/4`, sec: 180, speed: easy, incline: 1});
+      }
+      steps.push({label: "Cool down", sec: 240, speed: easy, incline: 0});
+      return {mode: "timer", steps, hard, easy,
+              note: `Hard is ${num(hard)} km/h, easy is ${num(easy)} km/h. `
+                  + `If you can talk during the fourth interval, it wasn't hard.`};
+    },
+    fmt: t => `4 × 4 min @ ${num(t.hard)} km/h`,
+    score: r => r.km,
+    scoreFmt: v => `${num(v)} km`,
+  },
+  {
+    cid: "30-30", name: "Thirty thirties", kind: "run", mins: 22, tags: ["intervals"],
+    blurb: "Ten rounds of thirty seconds quick, thirty seconds easy. Short enough to be tempting.",
+    needs: () => true,
+    logAs: "run", lower: false,
+    prescribe(){
+      const hard = clampSpeed(speedFromPace(hardPace() * 0.94));
+      const easy = clampSpeed(speedFromPace(easyPace() * 1.15));
+      const steps = [{label: "Warm up", sec: 300, speed: easy, incline: 1}];
+      for (let i = 1; i <= 10; i++){
+        steps.push({label: `Quick ${i}/10`, sec: 30, speed: hard, incline: 1});
+        steps.push({label: `Easy ${i}/10`,  sec: 30, speed: easy, incline: 1});
+      }
+      steps.push({label: "Cool down", sec: 180, speed: easy, incline: 0});
+      return {mode: "timer", steps, hard, easy,
+              note: `A treadmill takes a few seconds to change speed — start the belt moving up `
+                  + `as the rest timer hits five.`};
+    },
+    fmt: t => `10 × 30 s @ ${num(t.hard)} km/h`,
+    score: r => r.km,
+    scoreFmt: v => `${num(v)} km`,
+  },
+  {
+    cid: "incline-grind", name: "The incline grind", kind: "run", mins: 30, tags: ["steady"],
+    blurb: "Half an hour uphill at a walk you could hold a conversation at, if you had the breath.",
+    needs: () => true,
+    logAs: "run", lower: false,
+    prescribe(){
+      const inc = clampIncline(12);
+      const speed = clampSpeed(5.5);
+      return {mode: "timer", steps: [
+                {label: "Ease in",  sec: 180,  speed: clampSpeed(4.5), incline: clampIncline(4)},
+                {label: "Climb",    sec: 1500, speed, incline: inc},
+                {label: "Walk off", sec: 120,  speed: clampSpeed(4),   incline: 0}],
+              hard: speed, easy: speed,
+              note: `${num(speed)} km/h at ${inc}% — hands off the rails, that's the whole exercise.`};
+    },
+    fmt: t => `30 min @ ${t.steps[1].incline}% incline`,
+    score: r => r.km,
+    scoreFmt: v => `${num(v)} km`,
+  },
+
+  /* ---------------- bodyweight ---------------- */
+  {
+    cid: "pushup-100", name: "One hundred push-ups", kind: "body", mins: 12, tags: ["for time"],
+    blurb: "A hundred push-ups, as few sets as it takes. The clock runs the whole time.",
+    needs: () => true, baseline: "pushup",
+    logAs: null, lower: true,
+    prescribe(){
+      const b = baselineFor("pushup");
+      return {mode: "single", reps: 100,
+              field: {key: "sec", label: "Time taken", unit: "time"},
+              note: b ? `At a best set of ${b}, sets of ${Math.max(5, Math.round(b * 0.6))} `
+                      + `with short rests will get you there fastest.`
+                      : "Break it into sets well short of failure from the very first one."};
+    },
+    fmt: () => "100 reps for time",
+    score: r => r.sec,
+    scoreFmt: v => mmss(v),
+  },
+  {
+    cid: "pushup-emom", name: "Push-ups on the minute", kind: "body", mins: 12, tags: ["emom"],
+    blurb: "A set every minute for ten minutes. Rest is whatever's left of the minute.",
+    needs: () => true, baseline: "pushup", needsBaseline: "pushup",
+    logAs: null, lower: false,
+    prescribe(){
+      const b = baselineFor("pushup") || 25;
+      // 40% of a max set is about the most that survives ten repeats.
+      const reps = Math.max(3, Math.round(b * 0.4));
+      const steps = Array.from({length: 10}, (_, i) =>
+        ({label: `Minute ${i+1}/10 — ${reps} reps`, sec: 60, reps}));
+      return {mode: "timer", steps, reps, rounds: 10,
+              note: `${reps} a minute, from a best set of ${b}. `
+                  + `If minute eight is comfortable you under-tested your max.`};
+    },
+    fmt: t => `10 × ${t.reps} on the minute`,
+    score: r => r.rounds != null ? r.rounds : 10,
+    scoreFmt: v => `${v}/10 rounds`,
+  },
+  {
+    cid: "plank-total", name: "Plank accumulation", kind: "body", mins: 10, tags: ["core"],
+    blurb: "Hold, drop, repeat, until the total is done. Only the accumulated time counts.",
+    needs: () => true, baseline: "plank",
+    logAs: null, lower: false,
+    prescribe(){
+      const b = baselineFor("plank");
+      const target = b ? Math.round(b * 3 / 15) * 15 : 300;
+      return {mode: "single", field: {key: "sec", label: "Total held", unit: "time"},
+              guess: target,
+              note: b ? `Three times your best single hold of ${mmss(b)}. Break it however you like.`
+                      : "Five minutes in total. Break it however you like."};
+    },
+    fmt: t => `${mmss(t.guess)} in total`,
+    score: r => r.sec,
+    scoreFmt: v => mmss(v),
+  },
+  {
+    cid: "deadhang", name: "Dead hang", kind: "body", mins: 6, tags: ["grip", "test"],
+    blurb: "Hang from the bar. Nothing else. Longer than last time is the only rule.",
+    needs: () => true, baseline: null,
+    logAs: null, lower: false,
+    prescribe(){
+      const pb = challengePB("deadhang");
+      return {mode: "single", field: {key: "sec", label: "Time hung", unit: "time"},
+              guess: pb ? pb.score + 5 : 45,
+              note: pb ? `Your best is ${mmss(pb.score)}. Beat it by five seconds.`
+                       : "Relax the shoulders and breathe. Most people quit early on the first go."};
+    },
+    fmt: t => `Beat ${mmss(t.guess)}`,
+    score: r => r.sec,
+    scoreFmt: v => mmss(v),
+  },
+];
+
+/* Baseline tests. Not in the draw — they are offered when a challenge needs a
+   number that isn't there yet. */
+const BASELINES = {
+  pushup: {key: "pushup", name: "Max push-ups", unit: "reps",
+           ask: "One set of push-ups to form failure. How many?",
+           field: {key: "v", label: "Reps", unit: "reps"}},
+  plank:  {key: "plank",  name: "Longest plank", unit: "time",
+           ask: "One plank, held until the hips drop. How long?",
+           field: {key: "v", label: "Time held", unit: "time"}},
+};
+
+/* ---- the draw ---- */
+/** Challenges that can be prescribed right now. */
+function eligible(opts){
+  const o = opts || {};
+  const today = iso();
+  return CHALLENGES.filter(c => {
+    if (o.kind && c.kind !== o.kind) return false;
+    if (o.maxMins && c.mins > o.maxMins) return false;
+    if (c.needs && !c.needs()) return false;
+    // Baselines are collected on the way in, so a missing one is not a block
+    // unless the challenge itself insists on it via needs().
+    if (o.fresh){
+      const last = lastDoneAt(c.cid);
+      if (last && last >= addDays(today, -2)) return false;   // done in the last 48h
+    }
+    return true;
+  });
+}
+/**
+ * Pick one challenge, weighted so that things you haven't touched come up more.
+ * @param {{kind?:string, maxMins?:number, avoid?:string}} opts
+ */
+function drawChallenge(opts){
+  const o = opts || {};
+  let pool = eligible(Object.assign({fresh: true}, o));
+  if (!pool.length) pool = eligible(o);               // relax the 48h rule
+  if (o.avoid && pool.length > 1) pool = pool.filter(c => c.cid !== o.avoid);
+  if (!pool.length) return null;
+
+  const today = iso();
+  const weight = c => {
+    const last = lastDoneAt(c.cid);
+    if (!last) return 4;                              // never tried — favour it
+    const days = Math.round((dObj(today) - dObj(last)) / dayMs);
+    return days >= 28 ? 3 : days >= 14 ? 2 : 1;
+  };
+  const total = pool.reduce((a, c) => a + weight(c), 0);
+  let r = RND() * total;
+  for (const c of pool){ r -= weight(c); if (r <= 0) return c; }
+  return pool[pool.length - 1];
 }
 
 /* ============================================================
@@ -581,7 +1101,7 @@ function go(v){
   render();
 }
 function render(){
-  ({home: renderHome, lift: renderLift, cardio: renderCardio,
+  ({home: renderHome, lift: renderLift, cardio: renderCardio, play: renderPlay,
     progress: renderProgress, settings: renderSettings}[view] || (()=>{}))();
 }
 
@@ -841,6 +1361,460 @@ function saveRun(){
   toast(`Run saved · ${num(km)} km at ${mmss(sec / km)}/km`);
 }
 
+/* ============================================================
+   Play — draw a challenge, run it, log it
+   ============================================================ */
+
+/* One shared clock for every timed challenge. It is wall-clock based, not a
+   tick count: iOS suspends timers the moment the screen locks, and anything
+   counting ticks would silently under-run a four-minute interval. */
+let tmr = null;
+function stopClock(){ if (tmr){ clearInterval(tmr); tmr = null; } }
+function startClock(){ stopClock(); tmr = setInterval(tickClock, 250); }
+
+/* A beep is worth more than the screen on a treadmill. The context is created
+   inside the Start tap because iOS will not let audio start without a gesture. */
+let actx = null;
+function ensureAudio(){
+  try { if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)(); }
+  catch(e){ actx = null; }
+}
+function beep(freq, ms, gain){
+  if (!actx) return;
+  try {
+    const o = actx.createOscillator(), g = actx.createGain();
+    o.type = "sine"; o.frequency.value = freq;
+    g.gain.value = gain == null ? 0.22 : gain;
+    o.connect(g); g.connect(actx.destination);
+    const t = actx.currentTime;
+    o.start(t); g.gain.setValueAtTime(g.gain.value, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + ms / 1000);
+    o.stop(t + ms / 1000);
+  } catch(e){}
+}
+
+const nowMs = () => Date.now();
+/** Seconds left in the running step, or null when there is no timed step. */
+function stepLeft(){
+  const d = S.cdraft;
+  if (!d || !d.target.steps) return null;
+  const st = d.target.steps[d.prog.i];
+  if (!st) return null;
+  if (d.prog.paused) return d.prog.left;
+  return st.sec - (nowMs() - d.prog.t0) / 1000;
+}
+
+function tickClock(){
+  const d = S.cdraft;
+  if (!d || !d.target.steps){ stopClock(); return; }
+  if (d.prog.paused) return;
+
+  const left = stepLeft();
+  const steps = d.target.steps;
+
+  if (left <= 0){
+    // Advance. Two short beeps into a new step, one long one at the end.
+    if (d.prog.i + 1 < steps.length){
+      d.prog.i++; d.prog.t0 = nowMs();
+      save(); beep(880, 120); setTimeout(() => beep(880, 120), 160);
+      return renderPlay();
+    }
+    d.prog.i = steps.length - 1;
+    d.prog.paused = true; d.prog.left = 0;
+    save(); stopClock(); beep(660, 500);
+    return renderPlay();
+  }
+
+  // Countdown into the next step, so the belt can be changed in time.
+  const whole = Math.ceil(left);
+  if (whole <= 3 && whole >= 1 && d.prog.cue !== whole){ d.prog.cue = whole; beep(1320, 70, 0.14); }
+
+  const clk = $("#clk"); if (clk) clk.textContent = mmss(Math.max(0, left));
+  const bar = $("#bar > i");
+  if (bar) bar.style.width = (100 * (1 - left / steps[d.prog.i].sec)).toFixed(1) + "%";
+}
+
+/* ---- draw / start ---- */
+function drawInto(avoid){
+  const c = drawChallenge({
+    kind: S.ui.pk || undefined,
+    maxMins: S.ui.pm || undefined,
+    avoid: avoid || undefined,
+  });
+  // The prescription is generated once and stored. Re-rolling the weight on
+  // every re-render would make the card look like it was lying.
+  S.ui.draw = c ? {cid: c.cid, target: c.prescribe()} : null;
+  save();
+  renderPlay();
+  if (!c) toast("Nothing matches that filter.");
+}
+
+function startChallenge(cid, target){
+  const c = challengeById(cid);
+  if (!c) return;
+  // Only a challenge that cannot be prescribed without a benchmark stops for
+  // one; the rest have a sensible fallback and shouldn't make you test first.
+  if (c.needsBaseline && !baselineFor(c.needsBaseline))
+    return baselineSheet(c.needsBaseline, cid);
+
+  const t = target || c.prescribe();
+  S.cdraft = {
+    cid, target: t, started: nowMs(),
+    prog: t.mode === "timer"
+      ? {i: 0, t0: nowMs(), paused: true, left: t.steps[0].sec, cue: 0}
+      : {sets: []}
+  };
+  save(); ensureAudio(); go("play");
+}
+
+function abandonChallenge(){
+  if (!confirm("Give up on this challenge? Nothing will be logged.")) return;
+  stopClock(); S.cdraft = null; save(); renderPlay();
+  toast("Challenge abandoned.");
+}
+
+/* ---- baseline tests ---- */
+function baselineSheet(key, thenCid){
+  const b = BASELINES[key];
+  if (!b) return;
+  const timed = b.field.unit === "time";
+  sheet(`<h2 style="font-size:19px;margin-bottom:6px">${b.name}</h2>
+    <div class="hint" style="margin:0 0 14px;font-size:13.5px;line-height:1.5">${b.ask}
+      Do it now — the challenges scale off this number, so a flattering guess
+      only makes them wrong.</div>
+    ${timed
+      ? `<div class="row" style="margin-bottom:12px">
+           <div class="fld"><label>Minutes</label><input id="bMin" inputmode="numeric" placeholder="1"></div>
+           <div class="fld"><label>Seconds</label><input id="bSec" inputmode="numeric" placeholder="30"></div>
+         </div>`
+      : `<div class="fld" style="margin-bottom:12px"><label>${b.field.label}</label>
+           <input id="bVal" inputmode="numeric" placeholder="25"></div>`}
+    <button class="btn" data-act="bSave" data-key="${key}" data-then="${thenCid || ""}">Save benchmark</button>
+    <button class="btn sec sm" style="margin-top:8px" data-act="closeSheet">Not now</button>`);
+}
+
+/* ---- the Play view ---- */
+function renderPlay(){
+  const b = $("#playBody");
+  if (S.cdraft) return renderRunner(b);
+  stopClock();
+
+  const kinds = [["", "Anything"], ["lift", "Lifting"], ["run", "Treadmill"], ["body", "Bodyweight"]];
+  const mins  = [[0, "Any length"], [15, "≤ 15 min"], [30, "≤ 30 min"]];
+  const drawn = S.ui.draw && challengeById(S.ui.draw.cid) ? S.ui.draw : null;
+  const recent = doneChallenges().slice(0, 6);
+
+  b.innerHTML = `
+    <div class="head"><div><h1>Play</h1>
+      <div class="sub">Something to do on a whim, sized to your own numbers</div></div></div>
+
+    <button class="hero" data-act="draw">
+      <div class="ic">🎲</div>
+      <div><div class="t">Surprise me</div>
+        <div class="d">${drawn ? "Draw something else" : "Pick a challenge at random"}</div></div>
+    </button>
+
+    <div class="card"><h2>Narrow it down</h2>
+      <div class="chipbar" style="margin-bottom:8px">${kinds.map(([v, l]) =>
+        `<button class="fchip ${(S.ui.pk || "") === v ? "on" : ""}" data-act="pk" data-v="${v}">${l}</button>`).join("")}</div>
+      <div class="chipbar">${mins.map(([v, l]) =>
+        `<button class="fchip ${(S.ui.pm || 0) === v ? "on" : ""}" data-act="pm" data-v="${v}">${l}</button>`).join("")}</div>
+    </div>
+
+    ${drawn ? challengeCard(challengeById(drawn.cid), drawn.target, true) : `
+      <div class="card"><div class="empty">Tap <b>Surprise me</b>, or pick from the list below.</div></div>`}
+
+    <div class="card"><h2>Everything</h2><div class="list">${
+      CHALLENGES.map(c => {
+        const pb = challengePB(c.cid), last = lastDoneAt(c.cid);
+        const off = c.needs && !c.needs();
+        return `<button class="item k-${c.kind}" data-act="pick" data-id="${c.cid}"
+                  ${off ? "disabled style=\"opacity:.45\"" : ""}>
+          <div style="width:3px;align-self:stretch;border-radius:2px;background:var(--k)"></div>
+          <div class="g"><div class="t">${c.name}</div>
+            <div class="d">${c.mins} min${off ? " · needs more history" : last ? " · " + relPhrase(last) : " · not tried"}</div></div>
+          <div class="r">${pb ? `<b>${c.scoreFmt(pb.score)}</b><div class="d" style="font-size:12px">best</div>` : ""}</div>
+        </button>`;
+      }).join("")}</div></div>
+
+    <div class="card"><h2>Recent results</h2><div class="list">${
+      recent.length ? recent.map(r => {
+        const c = challengeById(r.cid);
+        const pb = challengePB(r.cid);
+        const isPb = pb && pb.id === r.id;
+        return `<div class="item k-${r.kind || (c && c.kind) || "fun"}">
+          <div style="width:3px;align-self:stretch;border-radius:2px;background:var(--k)"></div>
+          <div class="g"><div class="t">${esc(r.name)}${isPb ? ` <span class="pill pb">best</span>` : ""}</div>
+            <div class="d">${esc(r.detail || "")}</div></div>
+          <div class="r"><b>${c && typeof r.score === "number" ? c.scoreFmt(r.score) : ""}</b>
+            <div class="d" style="font-size:12px">${relDate(r.date)}</div></div></div>`;
+      }).join("")
+      : `<div class="empty">No challenges done yet.<br>That's what the dice are for.</div>`}</div></div>`;
+}
+
+/** The offered-challenge card. `live` adds the Start / Re-roll buttons. */
+function challengeCard(c, t, live){
+  const pb = challengePB(c.cid);
+  return `<div class="card chal k-${c.kind}">
+    <div class="top">
+      <div class="nm">${c.name}</div>
+      <span class="pill kind">${c.kind === "body" ? "bodyweight" : c.kind === "run" ? "treadmill" : c.kind}</span>
+    </div>
+    <div class="bl">${c.blurb}</div>
+    <div class="presc"><div class="k">${t.exName ? esc(t.exName) : c.mins + " minutes"}</div>
+      <div class="v">${c.fmt(t)}</div></div>
+    ${t.note ? `<div class="why">${t.note}</div>` : ""}
+    ${/* Some notes already quote the record — don't say it twice. */
+      pb && !(t.note || "").includes(c.scoreFmt(pb.score))
+      ? `<div class="why">Your best: <b style="color:var(--ink)">${c.scoreFmt(pb.score)}</b>, ${relPhrase(pb.date)}.</div>` : ""}
+    ${live ? `<div class="acts">
+      <button class="btn" data-act="startChal" data-id="${c.cid}">Start</button>
+      <button class="btn sec" style="flex:none;width:auto;padding:0 18px" data-act="reroll" data-id="${c.cid}">Re-roll</button>
+    </div>` : ""}
+  </div>`;
+}
+
+/* ---- the runner ---- */
+function renderRunner(b){
+  const d = S.cdraft, c = challengeById(d.cid), t = d.target;
+  if (!c){ S.cdraft = null; save(); return renderPlay(); }
+
+  const head = `<div class="head"><div><h1>${c.name}</h1>
+      <div class="sub">${t.exName ? esc(t.exName) + " · " : ""}${c.fmt(t)}</div></div>
+    <button class="iconbtn" data-act="abandon" aria-label="Give up">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>`;
+
+  b.innerHTML = head + `<div class="k-${c.kind}">` +
+    (t.mode === "timer" ? runnerTimer(c, t, d) :
+     t.mode === "sets"  ? runnerSets(c, t, d)  : runnerSingle(c, t, d)) + `</div>`;
+
+  if (t.mode === "timer" && !d.prog.paused) startClock(); else stopClock();
+  if (t.mode === "sets") wireSteppers();
+}
+
+function runnerTimer(c, t, d){
+  const steps = t.steps, i = d.prog.i, st = steps[i];
+  const left = Math.max(0, stepLeft());
+  const last = i === steps.length - 1;
+  const finished = last && left <= 0;
+  const nx = steps[i + 1];
+  const rest = /easy|rest|cool|walk/i.test(st.label);
+
+  return `<div class="now">
+      <div class="lbl">${esc(st.label)}</div>
+      <div class="clock ${rest ? "rest" : ""}" id="clk">${mmss(left)}</div>
+      <div class="cue">${
+        st.speed ? `${num(st.speed)} km/h${st.incline ? ` · ${st.incline}% incline` : " · flat"}`
+        : st.reps ? `${st.reps} reps` : "&nbsp;"}</div>
+      <div class="bar" id="bar"><i style="width:${(100 * (1 - left / st.sec)).toFixed(1)}%"></i></div>
+      <div class="nx">${finished ? "Done — log it below."
+        : nx ? `Next: ${esc(nx.label)}${nx.speed ? ` at ${num(nx.speed)} km/h` : ""}`
+             : "Last one."}</div>
+    </div>
+
+    ${finished ? `<button class="btn" data-act="chalFinish">Log this challenge</button>`
+    : `<div class="row">
+        <button class="btn" data-act="tPause">${d.prog.paused ? (d.prog.left === st.sec && i === 0 ? "Start" : "Resume") : "Pause"}</button>
+        <button class="btn sec" data-act="tSkip">Skip step</button>
+      </div>`}
+
+    <div class="card" style="margin-top:12px"><h2>The session</h2>
+      <div class="steplist">${steps.map((s, j) =>
+        `<div class="srow ${j === i ? "cur" : j < i ? "done" : ""}">
+          <div class="g">${esc(s.label)}</div>
+          <div>${s.speed ? num(s.speed) + " km/h" : s.reps ? s.reps + " reps" : ""}</div>
+          <div style="width:44px;text-align:right">${mmss(s.sec)}</div>
+        </div>`).join("")}</div>
+      ${t.note ? `<div class="hint">${t.note}</div>` : ""}
+      <button class="btn sec sm" style="margin-top:10px" data-act="chalFinish">Finish early and log it</button>
+    </div>`;
+}
+
+function runnerSets(c, t, d){
+  const done = d.prog.sets;
+  const n = t.sets;
+  const planned = j => t.ladder ? t.ladder[j] : t.reps;
+  const cur = done.length;
+  const left = Math.max(0, n - cur);
+  const inc = incOf(t.exName);
+  const lastSet = done[done.length - 1];
+  const w = lastSet ? lastSet.w : t.w;
+  const r = t.amrap ? (lastSet ? lastSet.r : planned(cur) || 10) : (planned(cur) || t.reps || 5);
+
+  return `<div class="now">
+      <div class="lbl">${left ? `Set ${cur + 1} of ${n}` : "All sets logged"}</div>
+      <div class="clock">${left ? `${num(t.w)} kg` : "✓"}</div>
+      <div class="cue">${
+        !left ? `${done.reduce((a,s)=>a+s.r,0)} reps total`
+        : t.amrap ? "as many as form allows"
+        : `${planned(cur)} reps${t.rest ? ` · ${t.rest}s rest` : ""}`}</div>
+      <div class="slots">${Array.from({length: n}, (_, j) =>
+        `<div class="slot ${j < cur ? "done" : j === cur ? "cur" : ""}">${
+          j < cur ? `${done[j].r}×` + num(done[j].w) : (planned(j) || "?")}</div>`).join("")}</div>
+    </div>
+
+    ${left ? `<div class="card">
+      <div class="entry" style="margin-top:0">
+        <div class="fld"><label>Weight</label>
+          <div class="step">
+            <button data-act="cStep" data-f="w" data-d="-${inc}">&minus;</button>
+            <input id="cW" inputmode="decimal" data-cin="w" value="${num(w)}">
+            <button data-act="cStep" data-f="w" data-d="${inc}">+</button>
+          </div></div>
+        <div class="fld"><label>Reps</label>
+          <div class="step">
+            <button data-act="cStep" data-f="r" data-d="-1">&minus;</button>
+            <input id="cR" inputmode="numeric" data-cin="r" value="${r}">
+            <button data-act="cStep" data-f="r" data-d="1">+</button>
+          </div></div>
+        <button class="addset" data-act="cLog">Log</button>
+      </div>
+      ${cur ? `<button class="btn sec sm" style="margin-top:10px" data-act="cUndo">Undo last set</button>` : ""}
+      ${t.rest ? `<div class="hint">${t.rest} seconds between sets.</div>` : ""}
+    </div>` : ""}
+
+    <div class="card"><h2>Why this weight</h2>
+      <div class="hint" style="margin-top:0">${t.note || ""}</div>
+      ${cur ? `<button class="btn" style="margin-top:12px" data-act="chalFinish">Log this challenge</button>` : ""}
+    </div>`;
+}
+
+function runnerSingle(c, t, d){
+  const timed = t.field.unit === "time";
+  return `<div class="now">
+      <div class="lbl">${t.reps ? "The task" : "Target"}</div>
+      <div class="clock">${c.fmt(t)}</div>
+      <div class="cue">${t.speed ? `start at ${num(t.speed)} km/h` : t.reps ? `${t.reps} reps` : "&nbsp;"}</div>
+    </div>
+    <div class="card"><h2>${t.field.label}</h2>
+      ${timed
+        ? `<div class="row">
+            <div class="fld"><label>Minutes</label><input id="sMin" inputmode="numeric" placeholder="4"></div>
+            <div class="fld"><label>Seconds</label><input id="sSec" inputmode="numeric" placeholder="30"></div>
+          </div>`
+        : `<div class="fld"><input id="sVal" inputmode="numeric" placeholder="0"></div>`}
+      <button class="btn" style="margin-top:12px" data-act="chalFinish">Save result</button>
+      ${t.note ? `<div class="hint">${t.note}</div>` : ""}
+    </div>`;
+}
+
+/* Keep typed values in state so a re-render doesn't drop them. */
+function wireSteppers(){
+  $$("[data-cin]").forEach(el => el.addEventListener("input", () => {}));
+}
+function readSetInputs(t){
+  const wEl = $("#cW"), rEl = $("#cR");
+  return {
+    w: wEl ? (parseFloat(wEl.value) || 0) : t.w,
+    r: rEl ? (parseInt(rEl.value) || 0) : 0,
+  };
+}
+
+/* ---- finishing ---- */
+/** Seconds from a minutes/seconds pair of inputs. */
+function readMmss(minSel, secSel){
+  return (parseInt(($(minSel) || {}).value) || 0) * 60 + (parseInt(($(secSel) || {}).value) || 0);
+}
+
+function finishChallenge(){
+  const d = S.cdraft; if (!d) return;
+  const c = challengeById(d.cid), t = d.target;
+
+  if (t.mode === "sets"){
+    if (!d.prog.sets.length) return toast("Log at least one set first.");
+    return commitChallenge(c, t, {sets: d.prog.sets});
+  }
+
+  if (t.mode === "single"){
+    const v = t.field.unit === "time" ? readMmss("#sMin", "#sSec") : (parseFloat(($("#sVal") || {}).value) || 0);
+    if (!(v > 0)) return toast(t.field.unit === "time" ? "Enter your time." : "Enter a number.");
+    const res = t.field.key === "sec" ? {sec: v} : {v};
+    // A time trial is a real run over a known distance — it belongs in the log.
+    if (c.logAs === "run" && t.km > 0) res.km = t.km;
+    return commitChallenge(c, t, res);
+  }
+
+  // Timer: a treadmill's own distance is the honest one, so it gets confirmed.
+  const elapsed = t.steps.slice(0, d.prog.i + 1).reduce((a, s) => a + s.sec, 0);
+  if (c.logAs === "run"){
+    const estKm = Math.round(t.steps.reduce((a, s) => a + (s.speed || 0) * s.sec / 3600, 0) * 100) / 100;
+    return sheet(`<h2 style="font-size:19px;margin-bottom:6px">Log the run</h2>
+      <div class="hint" style="margin:0 0 14px">Take the distance off the treadmill console —
+        it won't match the estimate, and the console is the one that counts.</div>
+      <div class="row" style="margin-bottom:10px">
+        <div class="fld"><label>Distance (km)</label><input id="fKm" inputmode="decimal" value="${num(estKm)}"></div>
+        <div class="fld"><label>Avg HR</label><input id="fHr" inputmode="numeric" placeholder="—"></div>
+      </div>
+      <div class="row" style="margin-bottom:12px">
+        <div class="fld"><label>Minutes</label><input id="fMin" inputmode="numeric" value="${Math.floor(elapsed/60)}"></div>
+        <div class="fld"><label>Seconds</label><input id="fSec" inputmode="numeric" value="${elapsed%60}"></div>
+      </div>
+      <button class="btn" data-act="chalCommitRun">Save it</button>`);
+  }
+
+  // Timed bodyweight work: rounds completed is the score.
+  const rounds = t.rounds || t.steps.filter(s => s.reps).length;
+  return sheet(`<h2 style="font-size:19px;margin-bottom:6px">How did it go?</h2>
+    <div class="hint" style="margin:0 0 14px">Rounds you completed in full. Stopping short is
+      information, not failure — the next target reads this number.</div>
+    <div class="fld" style="margin-bottom:12px"><label>Rounds completed</label>
+      <input id="fRounds" inputmode="numeric" value="${rounds}"></div>
+    <button class="btn" data-act="chalCommitRounds" data-max="${rounds}">Save it</button>`);
+}
+
+/**
+ * Write a finished challenge into the log.
+ * Results land in the main history too, so the e1RM chart and weekly volume
+ * stay honest — a heavy challenge set is still a heavy set.
+ */
+function commitChallenge(c, t, result){
+  const date = iso();
+  const score = c.score(result);
+  const prev = challengePB(c.cid);
+  const isPb = typeof score === "number" &&
+    (!prev || (c.lower ? score < prev.score : score > prev.score));
+
+  let detail = "";
+  if (result.sets){
+    detail = `${result.sets.length} sets · ${result.sets.reduce((a,s) => a + s.r, 0)} reps`;
+  } else if (result.km != null){
+    detail = `${num(result.km)} km in ${mmss(result.sec)}`;
+  } else if (result.rounds != null){
+    detail = `${result.rounds} rounds`;
+  } else if (result.sec != null){
+    detail = mmss(result.sec);
+  }
+
+  S.challenges.push({
+    id: uid(), cid: c.cid, date, name: c.name, kind: c.kind,
+    exName: t.exName || null, score, detail,
+    target: c.fmt(t),
+  });
+
+  // Mirror into the main log where it belongs there.
+  if (c.logAs === "session" && result.sets && result.sets.length){
+    const e = exByName(t.exName);
+    if (e){
+      S.sessions.push({
+        id: uid(), rid: null, chal: c.cid, name: c.name, date,
+        entries: [{ex: e.id, sets: result.sets.map(s => ({w: s.w, r: s.r}))}],
+      });
+    }
+  }
+  if (c.logAs === "run" && result.km > 0 && result.sec > 0){
+    S.runs.push({id: uid(), chal: c.cid, date, km: result.km, sec: result.sec, hr: result.hr || 0});
+  }
+
+  stopClock();
+  S.cdraft = null;
+  S.ui.draw = null;
+  save(); closeSheet(); go("play");
+
+  if (isPb){ beep(1046, 160); setTimeout(() => beep(1318, 240), 180); }
+  toast(isPb ? `Best yet — ${c.scoreFmt(score)}.` : `Logged · ${c.scoreFmt(score)}`, isPb);
+}
+
 /* ---------------- Progress ---------------- */
 let progEx = null;
 function renderProgress(){
@@ -919,7 +1893,41 @@ function renderSettings(){
       <div class="row"><button class="btn sec sm" data-act="export">Export</button>
         <button class="btn sec sm" data-act="import">Import</button></div>
       <div class="hint">${S.sessions.length} sessions · ${S.runs.length} runs ·
-        ${S.weights.length} weigh-ins · ${(bytes/1024).toFixed(1)} KB</div>
+        ${S.weights.length} weigh-ins · ${S.challenges.length} challenges ·
+        ${(bytes/1024).toFixed(1)} KB</div>
+      ${localStorage.getItem(BAK) ? `<button class="btn sec sm" style="margin-top:10px"
+        data-act="restoreBak">Restore pre-challenges backup</button>
+        <div class="hint">Taken automatically before the challenges update. Restoring it
+          discards everything logged since.</div>` : ""}
+    </div>
+
+    <div class="card"><h2>Treadmill</h2>
+      <div class="sub" style="margin-bottom:12px">Running challenges prescribe a speed and an
+        incline, so they need to know what the machine can actually do.</div>
+      <div class="row" style="margin-bottom:12px">
+        <div class="fld"><label>Top speed (km/h)</label>
+          <input id="tmMax" inputmode="decimal" value="${num(tmMax())}"></div>
+        <div class="fld"><label>Max incline (%)</label>
+          <input id="tmInc" inputmode="numeric" value="${num(tmInc())}"></div>
+      </div>
+      <button class="btn sec sm" data-act="tmSave">Save limits</button>
+      <div class="hint">${(() => {
+        const p = recentPace();
+        return p ? `Your recent pace is ${mmss(p)} /km — about ${num(speedFromPace(p))} km/h.`
+                 : "Log a run and challenges will scale off your real pace instead of a default.";
+      })()}</div>
+    </div>
+
+    <div class="card"><h2>Benchmarks</h2>
+      <div class="sub" style="margin-bottom:12px">Push-ups and holds aren't in the training log,
+        so bodyweight challenges scale off these instead.</div>
+      <div class="list">${Object.keys(BASELINES).map(k => {
+        const b = BASELINES[k], v = baselineFor(k);
+        return `<button class="item" data-act="retest" data-key="${k}">
+          <div class="g"><div class="t">${b.name}</div>
+            <div class="d">${v ? "set " + relPhrase(S.bench[k].date) : "not tested yet"}</div></div>
+          <div class="r"><b>${v ? (b.unit === "time" ? mmss(v) : v) : "—"}</b></div></button>`;
+      }).join("")}</div>
     </div>
     <div class="card"><h2>Routines</h2><div class="list">${
       S.routines.map(r => `<button class="item" data-act="editRt" data-id="${r.id}">
@@ -1143,6 +2151,123 @@ document.addEventListener("click", e => {
       S.ex.push(ne);
       S.draft.entries.push({ex: ne.id, sets: [], w: null, r: 8});
       save(); closeSheet(); return renderLift();
+    }
+
+    /* --- challenges --- */
+    case "draw":   return drawInto();
+    case "reroll": return drawInto(id);
+    case "pk": S.ui.pk = t.dataset.v; S.ui.draw = null; save(); return renderPlay();
+    case "pm": S.ui.pm = +t.dataset.v; S.ui.draw = null; save(); return renderPlay();
+    case "pick": {
+      const c = challengeById(id);
+      if (!c) return;
+      S.ui.draw = {cid: c.cid, target: c.prescribe()};
+      save(); renderPlay(); $("#app").scrollTop = 0; return;
+    }
+    case "startChal": {
+      const dr = S.ui.draw;
+      return startChallenge(id, dr && dr.cid === id ? dr.target : null);
+    }
+    case "abandon":    return abandonChallenge();
+    case "closeSheet": return closeSheet();
+    case "chalFinish": return finishChallenge();
+
+    case "bSave": {
+      const key = t.dataset.key, bl = BASELINES[key];
+      if (!bl) return;
+      const v = bl.field.unit === "time"
+        ? readMmss("#bMin", "#bSec")
+        : (parseFloat(($("#bVal") || {}).value) || 0);
+      if (!(v > 0)) return toast("Enter a number.");
+      setBaseline(key, v);
+      closeSheet();
+      if (t.dataset.then) return startChallenge(t.dataset.then);
+      render(); return toast(`${bl.name} saved.`);
+    }
+    case "retest": return baselineSheet(t.dataset.key, "");
+
+    /* timer runner */
+    case "tPause": {
+      const p = S.cdraft.prog, st = S.cdraft.target.steps[p.i];
+      if (p.paused){
+        ensureAudio();
+        // Back-date the start so the remaining time is preserved exactly.
+        p.t0 = nowMs() - (st.sec - p.left) * 1000;
+        p.paused = false; p.cue = 0;
+      } else {
+        p.left = Math.max(0, stepLeft());
+        p.paused = true;
+      }
+      save(); return renderPlay();
+    }
+    case "tSkip": {
+      const d = S.cdraft, p = d.prog;
+      if (p.i + 1 < d.target.steps.length){
+        p.i++; p.t0 = nowMs(); p.paused = false; p.cue = 0;
+      } else {
+        p.paused = true; p.left = 0;
+      }
+      save(); return renderPlay();
+    }
+
+    /* sets runner */
+    case "cStep": {
+      const f = t.dataset.f, dl = parseFloat(t.dataset.d);
+      const el = f === "w" ? $("#cW") : $("#cR");
+      if (!el) return;
+      const base = parseFloat(el.value) || 0;
+      el.value = f === "w" ? num(Math.max(0, +(base + dl).toFixed(2)))
+                           : String(Math.max(0, Math.round(base + dl)));
+      return;
+    }
+    case "cLog": {
+      const d = S.cdraft, tg = d.target, v = readSetInputs(tg);
+      if (!(v.w >= 0) || !(v.r > 0)) return toast("Enter a weight and reps.");
+      d.prog.sets.push({w: v.w, r: v.r});
+      save();
+      if (d.prog.sets.length >= tg.sets) beep(880, 220);
+      return renderPlay();
+    }
+    case "cUndo": {
+      S.cdraft.prog.sets.pop(); save(); return renderPlay();
+    }
+
+    /* finishing */
+    case "chalCommitRun": {
+      const d = S.cdraft; if (!d) return;
+      const km  = parseFloat(($("#fKm") || {}).value) || 0;
+      const sec = readMmss("#fMin", "#fSec");
+      const hr  = parseInt(($("#fHr") || {}).value) || 0;
+      if (!(km > 0))  return toast("Enter a distance.");
+      if (!(sec > 0)) return toast("Enter a time.");
+      return commitChallenge(challengeById(d.cid), d.target, {km, sec, hr});
+    }
+    case "chalCommitRounds": {
+      const d = S.cdraft; if (!d) return;
+      const rounds = Math.max(0, parseInt(($("#fRounds") || {}).value) || 0);
+      return commitChallenge(challengeById(d.cid), d.target, {rounds});
+    }
+    case "delChal":
+      if (!confirm("Delete this challenge result?")) return;
+      S.challenges = S.challenges.filter(x => x.id !== id);
+      save(); render(); return toast("Result deleted.");
+
+    /* treadmill */
+    case "tmSave": {
+      const mx = parseFloat($("#tmMax").value) || 0, ic = parseFloat($("#tmInc").value) || 0;
+      if (!(mx >= 5)) return toast("A top speed below 5 km/h can't be right.");
+      S.ui.tmMax = mx; S.ui.tmInc = Math.max(0, ic);
+      S.ui.draw = null;                       // old prescriptions may exceed the new limits
+      save(); render(); return toast("Treadmill limits saved.");
+    }
+    case "restoreBak": {
+      const raw = localStorage.getItem(BAK);
+      if (!raw) return toast("No pre-upgrade backup on this device.");
+      if (!confirm("Restore the backup taken before the challenges update? Anything logged since will be lost.")) return;
+      try {
+        S = migrate(JSON.parse(raw));
+        save(); closeSheet(); go("home"); return toast("Backup restored.");
+      } catch(err){ return toast("That backup could not be read."); }
     }
 
     /* --- runs --- */
