@@ -577,10 +577,12 @@ const incOf = name => { const e = exByName(name); return e ? e.inc : 2.5; };
 
 /* ---- treadmill ----
    A treadmill takes numbers, not RPE, so challenges prescribe km/h and an
-   incline. Limits are editable in Settings because they are machine-specific;
-   the defaults are typical for a UK home treadmill. */
+   incline. Limits are editable in Settings because they are machine-specific.
+   The defaults are a NordicTrack T 6.5 S — 16 km/h and 0-10%, and the EU
+   console reads km/h. Note the incline ceiling is 10, not the 12 that the
+   usual "12-3-30" style workout assumes. */
 const tmMax = () => S.ui.tmMax > 0 ? S.ui.tmMax : 16;
-const tmInc = () => S.ui.tmInc > 0 ? S.ui.tmInc : 12;
+const tmInc = () => S.ui.tmInc > 0 ? S.ui.tmInc : 10;
 const clampSpeed   = k => Math.min(tmMax(), Math.max(1, Math.round(k * 10) / 10));
 const clampIncline = i => Math.min(tmInc(), Math.max(0, Math.round(i)));
 const paceOf        = (km, sec) => km > 0 ? sec / km : 0;

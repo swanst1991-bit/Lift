@@ -142,7 +142,10 @@ exactly like a layout bug in the app and is not one.
   the interval timer's audio cues — is written to spec but unconfirmed.
 - The challenge timer's beeps use WebAudio unlocked by the Start tap, which is the
   correct pattern for iOS but has not been confirmed on device.
-- Treadmill limits default to 16 km/h and 12% incline. If your machine differs, set
-  it in Settings or the interval challenges will prescribe speeds you can't reach.
+- Treadmill limits default to a **NordicTrack T 6.5 S**: 16 km/h top speed and
+  0–10% incline, with the console reading km/h. If you ever run this on a different
+  machine, change both in Settings — a prescription above what the belt can do is
+  worthless. Note the 10% ceiling means the usual "12-3-30" walk isn't possible on
+  this treadmill; the incline challenge asks for 10% instead.
 - No rest timer, supersets, RPE, or warm-up/working set distinction.
 - No Strava or Apple Health import. Runs are entered by hand.
