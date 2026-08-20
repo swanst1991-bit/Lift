@@ -97,7 +97,7 @@ touched two months of history that has no other copy.
 
 Edit `index.html`, then:
 
-1. **Bump the cache version** in `sw.js` — it is currently `lift-v3`. Skip this and
+1. **Bump the cache version** in `sw.js` — it is currently `lift-v4`. Skip this and
    phones may keep serving the old cached copy indefinitely.
 2. Commit and push both changed files.
 3. Open the app on the phone twice: once to fetch the new version in the background,
